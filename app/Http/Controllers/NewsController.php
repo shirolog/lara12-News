@@ -12,7 +12,7 @@ class NewsController extends Controller
         $articles = [];
         $keyword = request()->input('keyword');
 
-        $articles = News::getNews($keyword);
+        $articles = News::getNews();
         dd($articles);
         return view('news.index');
     }
