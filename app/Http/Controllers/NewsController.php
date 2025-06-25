@@ -13,6 +13,16 @@ class NewsController extends Controller
         $keyword = request()->input('keyword');
 
         $articles = News::getNews();
+    
+        $summerizeArticeles = [];
+
+        if(($articles) && isset($articles['articles'])) {
+            foreach ($articles['articles'] as $article) {
+               
+                $summerizeArticeles = News::summarizeNews($article['description']);
+                $content = json_decode($summerizeArticeles->getContent(), true);
+            }
+        }
         dd($articles);
         return view('news.index');
     }

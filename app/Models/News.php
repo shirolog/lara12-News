@@ -19,7 +19,7 @@ class News extends Model
         $apiKey = config('services.newsapi.key'); 
         
         $params = [
-            'country' => 'US',
+            'sources' => 'bild',
             'apiKey' => $apiKey,
         ];
 
