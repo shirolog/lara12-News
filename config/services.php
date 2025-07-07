@@ -39,7 +39,7 @@ return [
         'key' => env('NEWSAPI_KEY'),
     ],
 
-    'openai' => [
-        'key' => env('OPENAI_KEY'),
-    ],
+    'mistral' => [
+        'key' => env('MISTRAL_API_KEY'),
+    ]
 ];

@@ -40,21 +40,21 @@ class News extends Model
 
     public static function summarizeNews($content) {
         $client = new Client();
-        $apiKey = config('services.openai.key');
+        $apiKey = config('services.mistral.key');
         $systemRole = 'あなたは優秀なWebライターです';
         $prompt = '以下の記事を100文字程度で要約してください。#記事 /\n' .$content;
-        // INSERT_YOUR_REWRITE_HERE
+  
         try{
-            $response = $client->post('https://api.openai.com/v1/chat/completions', [
+            $response = $client->post('https://api.mistral.ai/v1/chat/completions', [
                 'headers' => [
                     'Content-Type' => 'application/json',
                     'Authorization' => 'Bearer ' . $apiKey,
                 ],
                 'json' => [
-                    'model' => 'gpt-4o-mini',
+                    'model' => 'mistral-medium',
                     'messages' => [
                         ['role' => 'system', 'content' => $systemRole],
-                        ['role' => 'user', 'content => $prompt'],
+                        ['role' => 'user', 'content' => $prompt],
                     ],
                     'max_tokens' => 300,
                 ]
