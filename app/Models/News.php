@@ -42,8 +42,13 @@ class News extends Model
         $client = new Client();
         $apiKey = config('services.mistral.key');
         $systemRole = 'あなたは優秀なWebライターです';
-        $prompt = '以下の記事を100文字程度で要約してください。#記事 /\n' .$content;
-  
+        $prompt = <<<EOT
+        以下の英文ニュースを日本語に翻訳したあと、100文字以内で要約してください。
+        
+        #記事
+        $content
+        EOT;  
+        
         try{
             $response = $client->post('https://api.mistral.ai/v1/chat/completions', [
                 'headers' => [
@@ -51,7 +56,7 @@ class News extends Model
                     'Authorization' => 'Bearer ' . $apiKey,
                 ],
                 'json' => [
-                    'model' => 'mistral-medium',
+                    'model' => 'mistral-small',
                     'messages' => [
                         ['role' => 'system', 'content' => $systemRole],
                         ['role' => 'user', 'content' => $prompt],

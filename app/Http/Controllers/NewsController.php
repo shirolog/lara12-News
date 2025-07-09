@@ -19,12 +19,16 @@ class NewsController extends Controller
         if(($articles) && isset($articles['articles'])) {
             foreach ($articles['articles'] as $article) {
                
-                $summerizeArticeles = News::summarizeNews($article['description']);
+                $jsonSummerizeArticeles = News::summarizeNews($article['description']);
                 $content = json_decode($summerizeArticeles->getContent(), true);
+                $summerizeArticeles[] = [
+                    'title' => $article['title'],
+                    'summary' => $content,
+                    'url' => $article['url'],
+                ];
             }
         }
-        dd($articles);
-        return view('news.index');
+        return view('news.index', compact('summerizeArticeles'));
     }
 
 }
