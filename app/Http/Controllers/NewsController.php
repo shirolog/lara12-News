@@ -19,6 +19,7 @@ class NewsController extends Controller
         if(($articles) && isset($articles['articles'])) {
             foreach ($articles['articles'] as $article) {
                
+                $contentText = $article['content'] ?? $article['description'];
                 $jsonSummerizeArticeles = News::summarizeNews($article['description']);
                 $content = json_decode($jsonSummerizeArticeles->getContent(), true);
                 $summerizeArticeles[] = [

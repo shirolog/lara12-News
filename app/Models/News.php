@@ -19,8 +19,9 @@ class News extends Model
         $apiKey = config('services.newsapi.key'); 
         
         $params = [
-            'sources' => 'bild',
+            'sources' => 'cnn',
             'apiKey' => $apiKey,
+            'pageSize' => 3,
         ];
 
         //キーワードを含むニュースを取得
@@ -43,7 +44,9 @@ class News extends Model
         $apiKey = config('services.mistral.key');
         $systemRole = 'あなたは優秀なWebライターです';
         $prompt = <<<EOT
-        以下の英文ニュースを日本語に翻訳したあと、100文字以内で要約してください。
+        以下のニュース本文を日本語に翻訳し、その後100文字以内で要約してください。
+        英語以外の言語（ドイツ語など）も含まれる場合があります。
+
         
         #記事
         $content

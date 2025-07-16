@@ -23,13 +23,22 @@
                 <h2 class="text-lg font-bold">{{ $article['title'] }}</h2>
                 <p class="text-xs my-2">要約内容</p>
                <div class="border border-blue-100 p-2 rounded-sm">{{ $article['summary']}}</div>
-               <a href="{{ $article['url'] }}" class="text-blue-500">詳細を見る</a>
+               <a href="{{ $article['url'] }}" target="_blank" class="text-blue-500">詳細を見る</a>
             </div>
         @endforeach
         @else
         <p>記事が見つかりませんでした。</p>
     @endif
 
-
+    <script>
+        //キーワードが入力されていない場合、アラートを表示
+        document.querySelector('form').addEventListener('submit', function(event){
+            const keyword = document.querySelector('input[name="keyword"]').value;
+            if(!keyword){
+                event.preventDefault();
+                alert('キーワードを入力してください');
+            }
+        })
+    </script>
 </body>
 </html>
